@@ -1,0 +1,734 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <title>小工程师训练基地</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      background: #f5f5f7;
+    }
+    header {
+      background: #1f2933;
+      color: #fff;
+      padding: 12px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      font-size: 18px;
+      margin: 0;
+    }
+    header small {
+      opacity: 0.8;
+      font-size: 12px;
+    }
+    .layout {
+      display: grid;
+      grid-template-columns: 260px 1fr;
+      min-height: calc(100vh - 50px);
+    }
+    nav {
+      background: #111827;
+      color: #e5e7eb;
+      padding: 12px;
+    }
+    nav h2 {
+      font-size: 14px;
+      margin: 8px 0 4px;
+      color: #9ca3af;
+    }
+    nav button {
+      width: 100%;
+      padding: 8px 10px;
+      margin-bottom: 6px;
+      border: none;
+      border-radius: 6px;
+      background: transparent;
+      color: #e5e7eb;
+      text-align: left;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    nav button.active {
+      background: #374151;
+    }
+    nav button:hover {
+      background: #1f2933;
+    }
+    nav .small-text {
+      font-size: 12px;
+      color: #9ca3af;
+      margin-top: 6px;
+    }
+    main {
+      padding: 16px 20px 40px;
+      overflow-y: auto;
+    }
+    .section {
+      display: none;
+    }
+    .section.active {
+      display: block;
+    }
+    h2 {
+      margin-top: 0;
+      font-size: 18px;
+      color: #111827;
+    }
+    .card {
+      background: #ffffff;
+      border-radius: 10px;
+      padding: 12px 14px;
+      margin-bottom: 12px;
+      box-shadow: 0 1px 3px rgba(15,23,42,0.08);
+    }
+    .task-title {
+      font-weight: 600;
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+    .task-meta {
+      font-size: 12px;
+      color: #6b7280;
+      margin-bottom: 6px;
+    }
+    .task-actions {
+      display: flex;
+      gap: 8px;
+      margin: 6px 0;
+      flex-wrap: wrap;
+    }
+    .btn {
+      padding: 4px 10px;
+      border-radius: 999px;
+      border: none;
+      cursor: pointer;
+      font-size: 12px;
+    }
+    .btn-link {
+      background: #e0f2fe;
+    }
+    .btn-link:hover {
+      background: #bfdbfe;
+    }
+    .btn-save {
+      background: #bbf7d0;
+    }
+    .btn-save:hover {
+      background: #86efac;
+    }
+    .checkbox-row {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 13px;
+      margin: 4px 0;
+    }
+    textarea {
+      width: 100%;
+      min-height: 50px;
+      font-size: 13px;
+      padding: 6px;
+      border-radius: 6px;
+      border: 1px solid #d1d5db;
+      resize: vertical;
+    }
+    .tag {
+      display: inline-block;
+      padding: 2px 8px;
+      border-radius: 999px;
+      font-size: 11px;
+      background: #eef2ff;
+      color: #4f46e5;
+      margin-right: 4px;
+    }
+    .small-label {
+      font-size: 12px;
+      color: #6b7280;
+      margin-top: 4px;
+    }
+    .input-inline {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin: 6px 0;
+      font-size: 13px;
+    }
+    input[type="number"],
+    input[type="text"],
+    input[type="date"] {
+      padding: 4px 6px;
+      border-radius: 6px;
+      border: 1px solid #d1d5db;
+      font-size: 13px;
+    }
+    select {
+      padding: 4px 6px;
+      border-radius: 6px;
+      border: 1px solid #d1d5db;
+      font-size: 13px;
+    }
+    .history-item {
+      font-size: 14px;
+      padding: 6px 0;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    .history-item strong {
+      font-size: 13px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 1px 6px;
+      border-radius: 999px;
+      font-size: 11px;
+      margin-left: 4px;
+      background: #e5e7eb;
+    }
+    .badge.done {
+      background: #bbf7d0;
+    }
+    .muted {
+      color: #9ca3af;
+      font-size: 12px;
+    }
+  </style>
+</head>
+<body>
+<header>
+  <div>
+    <h1>小工程师训练基地</h1>
+    <small id="todayLabel"></small>
+  </div>
+  <div style="font-size:12px;">
+    当前训练日：<span id="currentDayLabel"></span>
+  </div>
+</header>
+
+<div class="layout">
+  <nav>
+    <h2>导航</h2>
+    <button data-section="today" class="active">📅 今日训练</button>
+    <button data-section="family">🏠 家庭任务</button>
+    <button data-section="history">📜 历史记录</button>
+    <button data-section="settings">⚙️ 设置（家长）</button>
+    <div class="small-text">
+      提示：本页面数据存储在本机浏览器 localStorage 中，不会联网。
+    </div>
+  </nav>
+
+  <main>
+    <!-- 今日训练 -->
+    <section id="section-today" class="section active">
+      <h2>今日训练</h2>
+      <div id="todayTasksContainer"></div>
+      <div class="card">
+        <div class="task-title">今日小结（可选）</div>
+        <textarea id="todaySummary" placeholder="今天我学到了什么？遇到什么困难？"></textarea>
+        <button class="btn btn-save" onclick="saveTodaySummary()">保存今日小结</button>
+        <div class="small-label muted" id="todaySummaryStatus"></div>
+      </div>
+    </section>
+
+    <!-- 家庭任务 -->
+    <section id="section-family" class="section">
+      <h2>今日家庭任务</h2>
+      <div id="familyTaskContainer"></div>
+    </section>
+
+    <!-- 历史记录 -->
+    <section id="section-history" class="section">
+      <h2>历史记录</h2>
+      <div class="input-inline">
+        <label>选择日期：</label>
+        <input type="date" id="historyDate">
+        <button class="btn btn-save" onclick="loadHistory()">查看</button>
+      </div>
+      <div id="historyContainer" class="card" style="margin-top:10px;"></div>
+    </section>
+
+    <!-- 设置 -->
+    <section id="section-settings" class="section">
+      <h2>设置（家长使用）</h2>
+      <div class="card">
+        <div class="task-title">当前训练日（Day）</div>
+        <div class="input-inline">
+          <label for="currentDayInput">Day：</label>
+          <input type="number" id="currentDayInput" min="1" max="365" />
+          <button class="btn btn-save" onclick="updateCurrentDay()">保存</button>
+        </div>
+        <div class="small-label">
+          建议：从 Day 1 开始，每天 +1。<br>
+          后续我可以帮你生成：Day 1~Day N 的完整训练计划。
+        </div>
+      </div>
+      <div class="card">
+        <div class="task-title">训练计划数据说明（给你看的）</div>
+        <div class="small-label">
+          本页面内置了一个 <code>TASK_DEFINITIONS</code> 变量，里面是类似这样的结构：
+        </div>
+        <pre style="font-size:11px;background:#f9fafb;padding:8px;border-radius:6px;overflow:auto;">
+{
+  day: 1,
+  id: "d1-t1",
+  title: "任务1：让小猫向前走10步",
+  description: "在 Scratch 中写出：当绿旗被点击 → 移动10步。",
+  type: "code",
+  link: "https://studio.code.org/",
+  tags: ["事件", "顺序"]
+}
+        </pre>
+        <div class="small-label">
+          你后面可以根据我给你的训练计划，往这个数组里追加任务。<br>
+          第一期我们先用内置的 Day 1~Day 3 示例。
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script>
+  // ===== 基础工具函数 =====
+  function formatDate(d = new Date()) {
+    const y = d.getFullYear();
+    const m = String(d.getMonth() + 1).padStart(2, "0");
+    const day = String(d.getDate()).padStart(2, "0");
+    return `${y}-${m}-${day}`;
+  }
+
+  // ===== 内置训练计划（示例：Day 1~3，可后续扩展） =====
+  // 后面我可以根据你儿子的情况，帮你生成更长的 TASK_DEFINITIONS。
+  const TASK_DEFINITIONS = [
+    // Day 1
+    {
+      day: 1,
+      id: "d1-t1",
+      title: "任务1：预测小猫会怎么动",
+      description: "在 Scratch 新建项目，添加小猫。写：当绿旗被点击 → 移动10步。先想一想，再点击绿旗，观察发生了什么。",
+      type: "code",
+      link: "https://scratch.mit.edu/projects/editor/",
+      tags: ["事件", "顺序"]
+    },
+    {
+      day: 1,
+      id: "d1-t2",
+      title: "任务2：改变步数，比较效果",
+      description: "把10步改成50步，预测一下会发生什么，再运行验证。",
+      type: "code",
+      link: "https://scratch.mit.edu/projects/editor/",
+      tags: ["参数", "试验"]
+    },
+    {
+      day: 1,
+      id: "d1-t3",
+      title: "任务3：记录你的发现",
+      description: "用一句话说明：步数越大，小猫的运动有什么变化？",
+      type: "reflection",
+      link: "",
+      tags: ["总结"]
+    },
+
+    // Day 2
+    {
+      day: 2,
+      id: "d2-t1",
+      title: "任务1：理解方向（面向90度）",
+      description: "在 Scratch 写：当绿旗被点击 → 面向90度 → 移动30步。先猜一猜会往哪边走。",
+      type: "code",
+      link: "https://scratch.mit.edu/projects/editor/",
+      tags: ["方向", "预测"]
+    },
+    {
+      day: 2,
+      id: "d2-t2",
+      title: "任务2：画一个小圆",
+      description: "使用：落笔 → 重复20次 → 移动10步 → 右转18度，运行看看轨迹。",
+      type: "code",
+      link: "https://scratch.mit.edu/projects/editor/",
+      tags: ["循环", "图形"]
+    },
+
+    // Day 3
+    {
+      day: 3,
+      id: "d3-t1",
+      title: "任务1：绕正方形走一圈",
+      description: "让小猫移动40步，然后右转90度，重复4次，形成正方形轨迹。",
+      type: "code",
+      link: "https://scratch.mit.edu/projects/editor/",
+      tags: ["循环", "几何"]
+    },
+    {
+      day: 3,
+      id: "d3-t2",
+      title: "任务2：错误角度实验",
+      description: "把90度改成80度，再画一遍。观察图形变化，并思考为什么。",
+      type: "experiment",
+      link: "https://scratch.mit.edu/projects/editor/",
+      tags: ["调试", "实验"]
+    }
+  ];
+
+  // 家庭任务（示例，可扩展）
+  const FAMILY_TASKS = [
+    { day: 1, text: "整理书桌5分钟，并把今天要用的书本摆整齐。" },
+    { day: 2, text: "睡前自己准备好明天的书包和衣服。" },
+    { day: 3, text: "帮助家里做一件小事（倒垃圾/收拾玩具），并告诉爸妈你做了什么。" }
+  ];
+
+  // ===== 状态管理 =====
+  function getCurrentDay() {
+    const stored = localStorage.getItem("currentTrainingDay");
+    return stored ? parseInt(stored, 10) : 1;
+  }
+
+  function setCurrentDay(day) {
+    localStorage.setItem("currentTrainingDay", String(day));
+    document.getElementById("currentDayLabel").textContent = "Day " + day;
+    document.getElementById("currentDayInput").value = day;
+  }
+
+  // 读取某天某任务的记录
+  function loadTaskState(dateStr, taskId) {
+    const key = "training_log_" + dateStr;
+    const raw = localStorage.getItem(key);
+    if (!raw) return null;
+    try {
+      const data = JSON.parse(raw);
+      return data.tasks?.[taskId] || null;
+    } catch {
+      return null;
+    }
+  }
+
+  // 保存某天某任务的记录
+  function saveTaskState(dateStr, taskId, state) {
+    const key = "training_log_" + dateStr;
+    let data = { date: dateStr, tasks: {}, summary: "" };
+    const raw = localStorage.getItem(key);
+    if (raw) {
+      try {
+        data = JSON.parse(raw);
+      } catch {
+        // ignore
+      }
+    }
+    if (!data.tasks) data.tasks = {};
+    data.tasks[taskId] = state;
+    localStorage.setItem(key, JSON.stringify(data));
+  }
+
+  // 保存当天总结
+  function saveTodaySummary() {
+    const dateStr = formatDate();
+    const key = "training_log_" + dateStr;
+    let data = { date: dateStr, tasks: {}, summary: "" };
+    const raw = localStorage.getItem(key);
+    if (raw) {
+      try {
+        data = JSON.parse(raw);
+      } catch {
+        // ignore
+      }
+    }
+    data.summary = document.getElementById("todaySummary").value || "";
+    localStorage.setItem(key, JSON.stringify(data));
+    const status = document.getElementById("todaySummaryStatus");
+    status.textContent = "已保存 " + new Date().toLocaleTimeString();
+    setTimeout(() => (status.textContent = ""), 2000);
+  }
+
+  // ===== 界面渲染 =====
+  function renderToday() {
+    const todayStr = formatDate();
+    document.getElementById("todayLabel").textContent = `今天：${todayStr}`;
+    const currentDay = getCurrentDay();
+    document.getElementById("currentDayLabel").textContent = "Day " + currentDay;
+
+    // 渲染任务
+    const container = document.getElementById("todayTasksContainer");
+    container.innerHTML = "";
+    const todaysTasks = TASK_DEFINITIONS.filter(t => t.day === currentDay);
+    if (todaysTasks.length === 0) {
+      container.innerHTML = '<div class="card"><div class="muted">当前 Day 没有配置任务。你可以在代码中扩展 TASK_DEFINITIONS。</div></div>';
+      return;
+    }
+
+    todaysTasks.forEach(task => {
+      const card = document.createElement("div");
+      card.className = "card";
+
+      const title = document.createElement("div");
+      title.className = "task-title";
+      title.textContent = task.title;
+      card.appendChild(title);
+
+      const meta = document.createElement("div");
+      meta.className = "task-meta";
+      meta.textContent = `Day ${task.day} · 任务ID：${task.id}`;
+      card.appendChild(meta);
+
+      if (task.tags && task.tags.length) {
+        const tagsRow = document.createElement("div");
+        task.tags.forEach(tag => {
+          const span = document.createElement("span");
+          span.className = "tag";
+          span.textContent = tag;
+          tagsRow.appendChild(span);
+        });
+        card.appendChild(tagsRow);
+      }
+
+      const desc = document.createElement("div");
+      desc.style.fontSize = "13px";
+      desc.style.margin = "6px 0";
+      desc.textContent = task.description;
+      card.appendChild(desc);
+
+      const actions = document.createElement("div");
+      actions.className = "task-actions";
+
+      if (task.link) {
+        const linkBtn = document.createElement("button");
+        linkBtn.className = "btn btn-link";
+        linkBtn.textContent = "打开相关网站";
+        linkBtn.onclick = () => window.open(task.link, "_blank");
+        actions.appendChild(linkBtn);
+      }
+
+      const saveBtn = document.createElement("button");
+      saveBtn.className = "btn btn-save";
+      saveBtn.textContent = "保存此任务记录";
+      actions.appendChild(saveBtn);
+
+      card.appendChild(actions);
+
+      // 状态
+      const checkboxRow = document.createElement("div");
+      checkboxRow.className = "checkbox-row";
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.id = `chk_${task.id}`;
+      const chkLabel = document.createElement("label");
+      chkLabel.textContent = "我已经完成这个任务";
+      checkboxRow.appendChild(checkbox);
+      checkboxRow.appendChild(chkLabel);
+      card.appendChild(checkboxRow);
+
+      const noteLabel = document.createElement("div");
+      noteLabel.className = "small-label";
+      noteLabel.textContent = "简单写一句：我做了什么 / 我发现了什么：";
+      card.appendChild(noteLabel);
+
+      const textarea = document.createElement("textarea");
+      textarea.id = `note_${task.id}`;
+      card.appendChild(textarea);
+
+      const statusRow = document.createElement("div");
+      statusRow.className = "small-label muted";
+      statusRow.id = `status_${task.id}`;
+      card.appendChild(statusRow);
+
+      // 加载已保存状态
+      const saved = loadTaskState(todayStr, task.id);
+      if (saved) {
+        checkbox.checked = !!saved.done;
+        textarea.value = saved.note || "";
+      }
+
+      saveBtn.onclick = () => {
+        const state = {
+          done: checkbox.checked,
+          note: textarea.value || "",
+          savedAt: new Date().toISOString()
+        };
+        saveTaskState(todayStr, task.id, state);
+        statusRow.textContent = "已保存 " + new Date().toLocaleTimeString();
+        setTimeout(() => (statusRow.textContent = ""), 2000);
+      };
+
+      container.appendChild(card);
+    });
+
+    // 今日总结
+    const key = "training_log_" + todayStr;
+    const raw = localStorage.getItem(key);
+    if (raw) {
+      try {
+        const data = JSON.parse(raw);
+        document.getElementById("todaySummary").value = data.summary || "";
+      } catch {
+        document.getElementById("todaySummary").value = "";
+      }
+    } else {
+      document.getElementById("todaySummary").value = "";
+    }
+
+    // 家庭任务
+    renderFamilyTask();
+  }
+
+  function renderFamilyTask() {
+    const currentDay = getCurrentDay();
+    const task = FAMILY_TASKS.find(t => t.day === currentDay);
+    const container = document.getElementById("familyTaskContainer");
+    container.innerHTML = "";
+    const card = document.createElement("div");
+    card.className = "card";
+    if (!task) {
+      card.innerHTML = '<div class="muted">当前 Day 没有配置家庭任务。</div>';
+    } else {
+      const title = document.createElement("div");
+      title.className = "task-title";
+      title.textContent = "今日家庭任务";
+
+      const text = document.createElement("div");
+      text.style.fontSize = "14px";
+      text.style.marginTop = "6px";
+      text.textContent = task.text;
+
+      const checkboxRow = document.createElement("div");
+      checkboxRow.className = "checkbox-row";
+      const checkbox = document.createElement("input");
+      checkbox.type = "checkbox";
+      checkbox.id = "familyTaskDone";
+      const label = document.createElement("label");
+      label.textContent = "已经完成";
+
+      checkboxRow.appendChild(checkbox);
+      checkboxRow.appendChild(label);
+
+      const btn = document.createElement("button");
+      btn.className = "btn btn-save";
+      btn.textContent = "保存家庭任务记录";
+
+      const status = document.createElement("div");
+      status.className = "small-label muted";
+      status.id = "familyStatus";
+
+      // 加载状态
+      const dateStr = formatDate();
+      const key = "training_log_" + dateStr;
+      const raw = localStorage.getItem(key);
+      if (raw) {
+        try {
+          const data = JSON.parse(raw);
+          if (data.familyDone) checkbox.checked = true;
+        } catch {}
+      }
+
+      btn.onclick = () => {
+        const ds = formatDate();
+        const k = "training_log_" + ds;
+        let data = { date: ds, tasks: {}, summary: "" };
+        const r = localStorage.getItem(k);
+        if (r) {
+          try {
+            data = JSON.parse(r);
+          } catch {}
+        }
+        data.familyDone = checkbox.checked;
+        localStorage.setItem(k, JSON.stringify(data));
+        status.textContent = "已保存 " + new Date().toLocaleTimeString();
+        setTimeout(() => (status.textContent = ""), 2000);
+      };
+
+      card.appendChild(title);
+      card.appendChild(text);
+      card.appendChild(checkboxRow);
+      card.appendChild(btn);
+      card.appendChild(status);
+    }
+    container.appendChild(card);
+  }
+
+  function loadHistory() {
+    const dateInput = document.getElementById("historyDate");
+    const val = dateInput.value;
+    if (!val) {
+      alert("请先选择日期");
+      return;
+    }
+    const key = "training_log_" + val;
+    const container = document.getElementById("historyContainer");
+    container.innerHTML = "";
+    const raw = localStorage.getItem(key);
+    if (!raw) {
+      container.innerHTML = '<div class="muted">该日期没有记录。</div>';
+      return;
+    }
+    let data;
+    try {
+      data = JSON.parse(raw);
+    } catch {
+      container.innerHTML = '<div class="muted">记录格式错误，无法解析。</div>';
+      return;
+    }
+
+    const summary = document.createElement("div");
+    summary.className = "history-item";
+    summary.innerHTML = `<strong>日期：</strong>${val}<br>` +
+                        `<strong>今日小结：</strong>${data.summary || "（无）"}`;
+    container.appendChild(summary);
+
+    const family = document.createElement("div");
+    family.className = "history-item";
+    family.innerHTML = `<strong>家庭任务：</strong>` +
+                       (data.familyDone ? '<span class="badge done">已完成</span>' : '<span class="badge">未完成</span>');
+    container.appendChild(family);
+
+    if (data.tasks) {
+      Object.entries(data.tasks).forEach(([taskId, state]) => {
+        const item = document.createElement("div");
+        item.className = "history-item";
+        item.innerHTML =
+          `<strong>任务ID：</strong>${taskId}` +
+          (state.done ? '<span class="badge done">已完成</span>' : '<span class="badge">未完成</span>') +
+          `<br><strong>备注：</strong>${state.note || "（无）"}`;
+        container.appendChild(item);
+      });
+    } else {
+      const noTasks = document.createElement("div");
+      noTasks.className = "history-item";
+      noTasks.innerHTML = "<strong>任务记录：</strong>无";
+      container.appendChild(noTasks);
+    }
+  }
+
+  function updateCurrentDay() {
+    const val = parseInt(document.getElementById("currentDayInput").value, 10);
+    if (!val || val < 1) {
+      alert("请输入正确的 Day 数字（>=1）");
+      return;
+    }
+    setCurrentDay(val);
+    renderToday();
+  }
+
+  // ===== 导航逻辑 =====
+  document.addEventListener("DOMContentLoaded", () => {
+    // 初始化 current day
+    const day = getCurrentDay();
+    setCurrentDay(day);
+
+    // 今日日期默认填入历史查询
+    document.getElementById("historyDate").value = formatDate();
+
+    // 导航按钮绑定
+    document.querySelectorAll("nav button[data-section]").forEach(btn => {
+      btn.addEventListener("click", () => {
+        document.querySelectorAll("nav button[data-section]").forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+        const secId = btn.getAttribute("data-section");
+        document.querySelectorAll(".section").forEach(sec => sec.classList.remove("active"));
+        document.getElementById("section-" + secId).classList.add("active");
+      });
+    });
+
+    renderToday();
+  });
+</script>
+</body>
+</html>
