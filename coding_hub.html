@@ -321,192 +321,199 @@
 
   // ===== 内置训练计划（示例：Day 1~3，可后续扩展） =====
   const TASK_DEFINITIONS = [
-    // Day 1
-    {
-      day: 1,
-      id: "d1-t1",
-      title: "任务1：预测小猫会怎么动",
-      description: "在 Scratch 新建项目，添加小猫。写：当绿旗被点击 → 移动10步。先想一想，再点击绿旗，观察发生了什么。",
-      type: "code",
-      link: "https://scratch.mit.edu/projects/editor/",
-      tags: ["事件", "顺序"]
-    },
-    {
-      day: 1,
-      id: "d1-t2",
-      title: "任务2：改变步数，比较效果",
-      description: "把10步改成50步，预测一下会发生什么，再运行验证。",
-      type: "code",
-      link: "https://scratch.mit.edu/projects/editor/",
-      tags: ["参数", "试验"]
-    },
-    {
-      day: 1,
-      id: "d1-t3",
-      title: "任务3：记录你的发现",
-      description: "用一句话说明：步数越大，小猫的运动有什么变化？",
-      type: "reflection",
-      link: "",
-      tags: ["总结"]
-    },
+  // Day 1
+  {
+    day: 1,
+    id: "d1-t1",
+    title: "任务1：预测小猫会怎么动",
+    description: "在 Scratch 新建项目，添加小猫。写：当绿旗被点击 → 移动10步。先想一想，再点击绿旗，观察发生了什么。",
+    type: "code",
+    link: "https://scratch.mit.edu/projects/editor/",
+    tags: ["事件", "顺序"]
+  },
+  {
+    day: 1,
+    id: "d1-t2",
+    title: "任务2：改变步数，比较效果",
+    description: "把10步改成50步，预测一下会发生什么，再运行验证。",
+    type: "code",
+    link: "https://scratch.mit.edu/projects/editor/",
+    tags: ["参数", "试验"]
+  },
+  {
+    day: 1,
+    id: "d1-t3",
+    title: "任务3：记录你的发现",
+    description: "用一句话说明：步数越大，小猫的运动有什么变化？",
+    type: "reflection",
+    link: "",
+    tags: ["总结"]
+  },
 
-    // Day 2
-    {
-      day: 2,
-      id: "d2-t1",
-      title: "任务1：理解方向（面向90度）",
-      description: "在 Scratch 写：当绿旗被点击 → 面向90度 → 移动30步。先猜一猜会往哪边走。",
-      type: "code",
-      link: "https://scratch.mit.edu/projects/editor/",
-      tags: ["方向", "预测"]
-    },
-    {
-      day: 2,
-      id: "d2-t2",
-      title: "任务2：画一个小圆",
-      description: "使用：落笔 → 重复20次 → 移动10步 → 右转18度，运行看看轨迹。",
-      type: "code",
-      link: "https://scratch.mit.edu/projects/editor/",
-      tags: ["循环", "图形"]
-    },
+  // Day 2
+  {
+    day: 2,
+    id: "d2-t1",
+    title: "任务1：理解方向（面向90度）",
+    description: "在 Scratch 写：当绿旗被点击 → 面向90度 → 移动30步。先猜一猜会往哪边走。",
+    type: "code",
+    link: "https://scratch.mit.edu/projects/editor/",
+    tags: ["方向", "预测"]
+  },
+  {
+    day: 2,
+    id: "d2-t2",
+    title: "任务2：画一个小圆",
+    description: "使用：落笔 → 重复20次 → 移动10步 → 右转18度，运行看看轨迹。",
+    type: "code",
+    link: "https://scratch.mit.edu/projects/editor/",
+    tags: ["循环", "图形"]
+  },
 
-    // Day 3
-    {
-      day: 3,
-      id: "d3-t1",
-      title: "任务1：绕正方形走一圈",
-      description: "让小猫移动40步，然后右转90度，重复4次，形成正方形轨迹。",
-      type: "code",
-      link: "https://scratch.mit.edu/projects/editor/",
-      tags: ["循环", "几何"]
-    },
-    {
-      day: 3,
-      id: "d3-t2",
-      title: "任务2：错误角度实验",
-      description: "把90度改成80度，再画一遍。观察图形变化，并思考为什么。",
-      type: "experiment",
-      link: "https://scratch.mit.edu/projects/editor/",
-      tags: ["调试", "实验"]
-    }
-  ];
-// Day 4
-{
-  day: 4,
-  id: "d4-t1",
-  title: "任务1：改变小猫速度（引入变量）",
-  description: "在 Scratch 中创建一个变量 speed，设置 speed = 20，然后移动 speed 步。试着把 speed 改成 5、50，预测后运行。",
-  type: "code",
-  link: "https://scratch.mit.edu/projects/editor/",
-  tags: ["变量", "预测", "实验"]
-},
-{
-  day: 4,
-  id: "d4-t2",
-  title: "任务2：使用重复循环画一个三角形",
-  description: "写出：落笔 → 重复3次 → 移动60步 → 右转120度。观察轨迹。",
-  type: "code",
-  link: "https://scratch.mit.edu/projects/editor/",
-  tags: ["循环", "几何"]
-},
-{
-  day: 4,
-  id: "d4-t3",
-  title: "任务3：反思三角形和正方形有什么不同",
-  description: "用一句话说明：转多少度可以形成不同的图形？",
-  type: "reflection",
-  link: "",
-  tags: ["总结"]
-},
+  // Day 3
+  {
+    day: 3,
+    id: "d3-t1",
+    title: "任务1：绕正方形走一圈",
+    description: "让小猫移动40步，然后右转90度，重复4次，形成正方形轨迹。",
+    type: "code",
+    link: "https://scratch.mit.edu/projects/editor/",
+    tags: ["循环", "几何"]
+  },
+  {
+    day: 3,
+    id: "d3-t2",
+    title: "任务2：错误角度实验",
+    description: "把90度改成80度，再画一遍。观察图形变化，并思考为什么。",
+    type: "experiment",
+    link: "https://scratch.mit.edu/projects/editor/",
+    tags: ["调试", "实验"]
+  },
 
-// Day 5
-{
-  day: 5,
-  id: "d5-t1",
-  title: "任务1：让小猫绕圆跑（引入持续循环）",
-  description: "使用“永远重复” → 移动5步 → 右转5度，让小猫持续旋转跑圈。",
-  type: "code",
-  link: "https://scratch.mit.edu/projects/editor/",
-  tags: ["循环", "持续动作"]
-},
-{
-  day: 5,
-  id: "d5-t2",
-  title: "任务2：创建‘速度加速按钮’",
-  description: "创建变量 speed=5。当按空格键时，让 speed 增加5。让移动速度越来越快。",
-  type: "code",
-  link: "https://scratch.mit.edu/projects/editor/",
-  tags: ["变量", "输入事件"]
-},
-{
-  day: 5,
-  id: "d5-t3",
-  title: "任务3：写一句话：加速度对运动的影响是什么？",
-  description: "观察后，用一句话总结 speed 变化与运动效果之间的关系。",
-  type: "reflection",
-  tags: ["反思", "物理概念"]
-},
+  // Day 4
+  {
+    day: 4,
+    id: "d4-t1",
+    title: "任务1：改变小猫速度（引入变量）",
+    description: "在 Scratch 中创建一个变量 speed，设置 speed = 20，然后移动 speed 步。试着把 speed 改成 5、50，预测后运行。",
+    type: "code",
+    link: "https://scratch.mit.edu/projects/editor/",
+    tags: ["变量", "预测", "实验"]
+  },
+  {
+    day: 4,
+    id: "d4-t2",
+    title: "任务2：使用重复循环画一个三角形",
+    description: "写出：落笔 → 重复3次 → 移动60步 → 右转120度。观察轨迹。",
+    type: "code",
+    link: "https://scratch.mit.edu/projects/editor/",
+    tags: ["循环", "几何"]
+  },
+  {
+    day: 4,
+    id: "d4-t3",
+    title: "任务3：反思三角形和正方形有什么不同",
+    description: "用一句话说明：转多少度可以形成不同的图形？",
+    type: "reflection",
+    link: "",
+    tags: ["总结"]
+  },
 
-// Day 6
-{
-  day: 6,
-  id: "d6-t1",
-  title: "任务1：让小猫检测是否碰到边缘（条件）",
-  description: "写：移动15步 → 如果碰到边缘 → 右转180度。预测轨迹再运行。",
-  type: "code",
-  link: "https://scratch.mit.edu/projects/editor/",
-  tags: ["条件语句", "模拟"]
-},
-{
-  day: 6,
-  id: "d6-t2",
-  title: "任务2：制作‘球在盒子里反弹’模型",
-  description: "新建一个球角色，让它在四个方向随机移动，并在撞到边界时反弹。观察轨迹是否随机。",
-  type: "code",
-  link: "https://scratch.mit.edu/projects/editor/",
-  tags: ["条件", "随机", "模拟"]
-},
-{
-  day: 6,
-  id: "d6-t3",
-  title: "任务3：反思：为什么加上条件后更像现实世界？",
-  description: "用一句话总结“条件语句”为什么是编程的基础。",
-  type: "reflection",
-  tags: ["逻辑", "反思"]
-},
+  // Day 5
+  {
+    day: 5,
+    id: "d5-t1",
+    title: "任务1：让小猫绕圆跑（引入持续循环）",
+    description: "使用“永远重复” → 移动5步 → 右转5度，让小猫持续旋转跑圈。",
+    type: "code",
+    link: "https://scratch.mit.edu/projects/editor/",
+    tags: ["循环", "持续动作"]
+  },
+  {
+    day: 5,
+    id: "d5-t2",
+    title: "任务2：创建‘速度加速按钮’",
+    description: "创建变量 speed=5。当按空格键时，让 speed 增加5。让移动速度越来越快。",
+    type: "code",
+    link: "https://scratch.mit.edu/projects/editor/",
+    tags: ["变量", "输入事件"]
+  },
+  {
+    day: 5,
+    id: "d5-t3",
+    title: "任务3：写一句话：加速度对运动的影响是什么？",
+    description: "观察后，用一句话总结 speed 变化与运动效果之间的关系。",
+    type: "reflection",
+    link: "",
+    tags: ["反思", "物理概念"]
+  },
 
-// Day 7
-{
-  day: 7,
-  id: "d7-t1",
-  title: "任务1：用数学方法让小猫飞行（与你儿子的飞行兴趣结合）",
-  description: "使用：重复20次 → 移动10步 → 左转10度，让小猫飞出螺旋线轨迹，再尝试右转10度做镜像。",
-  type: "code",
-  tags: ["几何", "循环", "转向"]
-},
-{
-  day: 7,
-  id: "d7-t2",
-  title: "任务2：根据你的想法设计‘飞行轨道’",
-  description: "自由组合：移动步数 + 旋转角度 + 重复次数。让小猫飞出你想象的轨迹形状。",
-  type: "creative",
-  tags: ["创造", "图形编程"]
-},
-{
-  day: 7,
-  id: "d7-t3",
-  title: "任务3：总结：哪种角度和步数的组合最适合做螺旋？",
-  description: "写一句你自己认为最好看的飞行公式。",
-  type: "reflection",
-  tags: ["反思", "数学"]
-}
+  // Day 6
+  {
+    day: 6,
+    id: "d6-t1",
+    title: "任务1：让小猫检测是否碰到边缘（条件）",
+    description: "写：移动15步 → 如果碰到边缘 → 右转180度。预测轨迹再运行。",
+    type: "code",
+    link: "https://scratch.mit.edu/projects/editor/",
+    tags: ["条件语句", "模拟"]
+  },
+  {
+    day: 6,
+    id: "d6-t2",
+    title: "任务2：制作‘球在盒子里反弹’模型",
+    description: "新建一个球角色，让它在四个方向随机移动，并在撞到边界时反弹。观察轨迹是否随机。",
+    type: "code",
+    link: "https://scratch.mit.edu/projects/editor/",
+    tags: ["条件", "随机", "模拟"]
+  },
+  {
+    day: 6,
+    id: "d6-t3",
+    title: "任务3：反思：为什么加上条件后更像现实世界？",
+    description: "用一句话总结“条件语句”为什么是编程的基础。",
+    type: "reflection",
+    link: "",
+    tags: ["逻辑", "反思"]
+  },
 
-  // 家庭任务（示例，可扩展）
-  const FAMILY_TASKS = [
-    { day: 1, text: "整理书桌5分钟，并把今天要用的书本摆整齐。" },
-    { day: 2, text: "睡前自己准备好明天的书包和衣服。" },
-    { day: 3, text: "帮助家里做一件小事（倒垃圾/收拾玩具），并告诉爸妈你做了什么。" }
-  ];
+  // Day 7
+  {
+    day: 7,
+    id: "d7-t1",
+    title: "任务1：用数学方法让小猫飞行（与你儿子的飞行兴趣结合）",
+    description: "使用：重复20次 → 移动10步 → 左转10度，让小猫飞出螺旋线轨迹，再尝试右转10度做镜像。",
+    type: "code",
+    link: "https://scratch.mit.edu/projects/editor/",
+    tags: ["几何", "循环", "转向"]
+  },
+  {
+    day: 7,
+    id: "d7-t2",
+    title: "任务2：根据你的想法设计‘飞行轨道’",
+    description: "自由组合：移动步数 + 旋转角度 + 重复次数。让小猫飞出你想象的轨迹形状。",
+    type: "creative",
+    link: "https://scratch.mit.edu/projects/editor/",
+    tags: ["创造", "图形编程"]
+  },
+  {
+    day: 7,
+    id: "d7-t3",
+    title: "任务3：总结：哪种角度和步数的组合最适合做螺旋？",
+    description: "写一句你自己认为最好看的飞行公式。",
+    type: "reflection",
+    link: "",
+    tags: ["反思", "数学"]
+  }
+];
+
+
+    // 家庭任务（示例，可扩展）
+    const FAMILY_TASKS = [
+      { day: 1, text: "整理书桌5分钟，并把今天要用的书本摆整齐。" },
+      { day: 2, text: "睡前自己准备好明天的书包和衣服。" },
+      { day: 3, text: "帮助家里做一件小事（倒垃圾/收拾玩具），并告诉爸妈你做了什么。" }
+    ];
 
   // ===== 状态管理 =====
   function getCurrentDay() {
